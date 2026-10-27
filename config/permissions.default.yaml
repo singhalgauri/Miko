@@ -1,0 +1,32 @@
+# Owner: Person 2
+# Purpose: Default security permissions configuration for Miko actions
+# Policies:
+#   act_alone: Execute autonomously without user intervention
+#   ask_first: Pause workflow and require user confirmation via UI
+#   never: Hard block; cannot be invoked
+
+permissions:
+  file.move: "ask_first"
+  file.rename: "ask_first"
+  file.delete: "never"
+  file.read: "act_alone"
+  file.list: "act_alone"
+  file.organise: "ask_first"
+
+  email.read: "act_alone"
+  email.search: "act_alone"
+  email.draft: "act_alone"
+  email.send: "never"
+  email.archive: "ask_first"
+  email.delete: "never"
+
+  calendar.read: "act_alone"
+  calendar.create_event: "ask_first"
+  calendar.update_event: "ask_first"
+  calendar.delete_event: "never"
+
+  document.read: "act_alone"
+  document.index: "act_alone"
+  document.search: "act_alone"
+
+  briefing.generate: "act_alone"

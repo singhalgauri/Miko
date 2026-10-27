@@ -1,0 +1,14 @@
+[
+  {
+    "id": "inbox-001",
+    "subject": "URGENT: Server outage in production cluster",
+    "expected_category": "urgent_action",
+    "expected_priority": "high"
+  },
+  {
+    "id": "inbox-002",
+    "subject": "Your monthly cloud statement is ready",
+    "expected_category": "receipt",
+    "expected_priority": "low"
+  }
+]

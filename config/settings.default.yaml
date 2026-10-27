@@ -1,0 +1,12 @@
+# Owner: Person 2
+# Purpose: Default application runtime settings
+# TODO(person2): Allow UI and API overrides stored in SQLite
+
+provider: "mock" # options: local | nebius | mock
+offline_mode: false
+byo_api_key_enabled: false
+telemetry: false
+host: "127.0.0.1"
+port: 8000
+log_level: "INFO"
+data_dir: "./data"

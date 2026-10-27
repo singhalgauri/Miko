@@ -1,0 +1,7 @@
+# MASTER SERVICES AGREEMENT (SAMPLE)
+
+Clause 4. Termination:
+Either party may terminate this agreement without cause upon thirty (30) days written notice.
+
+Clause 7. Confidentiality:
+All proprietary technical information, benchmarks, and model artifacts must remain confidential for two (2) years.

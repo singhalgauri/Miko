@@ -1,0 +1,14 @@
+[
+  {
+    "id": "tc-001",
+    "prompt": "Move the downloaded receipt to my expenses folder",
+    "expected_action": "file.move",
+    "expected_keys": ["source", "destination"]
+  },
+  {
+    "id": "tc-002",
+    "prompt": "Send an email to John saying I'll be 10 minutes late",
+    "expected_action": "email.send",
+    "expected_keys": ["recipient", "subject", "body"]
+  }
+]

@@ -1,0 +1,8 @@
+[
+  {
+    "id": "doc-001",
+    "query": "What is the notice period for contract termination?",
+    "expected_answer_contains": "30 days",
+    "expected_citation_file": "sample_contract.pdf"
+  }
+]

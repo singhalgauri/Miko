@@ -1,0 +1,12 @@
+[
+  {
+    "id": "file-001",
+    "filename": "annual_report_2025.pdf",
+    "expected_target_dir": "Documents/Reports"
+  },
+  {
+    "id": "file-002",
+    "filename": "vacation_sunset.jpg",
+    "expected_target_dir": "Pictures"
+  }
+]

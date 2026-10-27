@@ -1,0 +1,21 @@
+# Owner: Person 4
+# Purpose: Docker Compose definition for running hosted Miko demo
+# TODO(person4): Add optional reverse proxy (Traefik/Nginx) for SSL termination
+
+version: "3.8"
+
+services:
+  miko:
+    image: miko:latest
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: miko-service
+    ports:
+      - "8000:8000"
+    environment:
+      - PROVIDER=mock
+      - NEBIUS_API_KEY=${NEBIUS_API_KEY:-}
+      - NEBIUS_BASE_URL=${NEBIUS_BASE_URL:-https://api.tokenfactory.nebius.com/v1}
+      - OLLAMA_HOST=http://host.docker.internal:11434
+    restart: unless-stopped

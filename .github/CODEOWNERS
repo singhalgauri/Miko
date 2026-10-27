@@ -1,0 +1,65 @@
+# Owner: Person 4
+# Purpose: GitHub Code Owners mapping for Miko monorepo
+# TODO(person4): Replace @person placeholders with actual GitHub usernames
+
+# Person 1: Core agents and model layer (backend lead)
+backend/app/providers/            @person1
+config/models.registry.yaml       @person1
+backend/app/registry/loader.py    @person1
+backend/app/agents/router.py      @person1
+backend/app/agents/inbox.py       @person1
+backend/app/agents/briefing.py    @person1
+backend/app/graphs/router_graph.py @person1
+backend/app/graphs/inbox_graph.py  @person1
+backend/app/graphs/briefing_graph.py @person1
+backend/app/validation/           @person1
+backend/tests/test_provider_interface.py @person1
+docs/nebius-notes.md              @person1
+
+# Person 2: Safety, data and background services
+backend/app/gateway/              @person2
+config/permissions.default.yaml   @person2
+backend/app/core/                 @person2
+backend/app/tools/                @person2
+backend/app/agents/file_organiser.py @person2
+backend/app/agents/document.py    @person2
+backend/app/graphs/file_organiser_graph.py @person2
+backend/app/graphs/document_graph.py @person2
+backend/app/rag/                  @person2
+backend/app/registry/hardware.py  @person2
+backend/app/registry/selector.py  @person2
+backend/app/service/              @person2
+scripts/install_service_*         @person2
+backend/tests/test_gateway.py     @person2
+backend/tests/test_registry.py    @person2
+
+# Person 3: Frontend, desktop and demo content
+apps/web/                         @person3
+apps/desktop/                     @person3
+backend/app/seed/                 @person3
+docs/demo-video-plan.md           @person3
+demo/                             @person3
+
+# Person 4: Deployment, evals and submission
+LICENSE                           @person4
+.gitignore                        @person4
+.editorconfig                     @person4
+Makefile                          @person4
+.env.example                      @person4
+CONTRIBUTING.md                   @person4
+.github/                          @person4
+deploy/                           @person4
+docs/release.md                   @person4
+backend/evals/                    @person4
+README.md                         @person4
+FEEDBACK.md                       @person4
+docs/submission-checklist.md      @person4
+scripts/dev.*                     @person4
+scripts/seed.*                    @person4
+
+# Shared (requires review from affected lead)
+backend/app/main.py               @person1 @person2 @person3 @person4
+backend/app/api/schemas.py        @person1 @person2 @person3 @person4
+docs/architecture.md              @person1 @person2 @person3 @person4
+backend/pyproject.toml            @person1 @person2 @person3 @person4
+apps/web/package.json             @person1 @person2 @person3 @person4

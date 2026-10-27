@@ -1,0 +1,26 @@
+[
+  {
+    "id": "cal-001",
+    "title": "Daily Standup & Hackathon Sync",
+    "start": "2026-10-27T10:00:00Z",
+    "end": "2026-10-27T10:30:00Z",
+    "location": "Virtual Room A",
+    "attendees": ["team@miko.local"]
+  },
+  {
+    "id": "cal-002",
+    "title": "Nebius Token Factory Benchmarking Review",
+    "start": "2026-10-27T14:00:00Z",
+    "end": "2026-10-27T15:00:00Z",
+    "location": "Lab Bench 4",
+    "attendees": ["person1@miko.local", "person4@miko.local"]
+  },
+  {
+    "id": "cal-003",
+    "title": "Demo Video Rehearsal",
+    "start": "2026-10-27T17:00:00Z",
+    "end": "2026-10-27T18:00:00Z",
+    "location": "Studio 1",
+    "attendees": ["person3@miko.local"]
+  }
+]
