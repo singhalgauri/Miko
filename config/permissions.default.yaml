@@ -21,6 +21,7 @@ permissions:
   email.delete: "never"
 
   calendar.read: "act_alone"
+  calendar.list_events: "act_alone"   # Required by BriefingAgent — see Person 1 cross-team dependency note
   calendar.create_event: "ask_first"
   calendar.update_event: "ask_first"
   calendar.delete_event: "never"
