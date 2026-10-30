@@ -42,3 +42,18 @@
 1. **Integrated Playground with JSON Schema Validation**: Built-in UI in Nebius console to test structured tool calls against Nemotron models directly.
 2. **Dynamic Quota & Usage Dashboards**: Granular breakdown of token velocity, prompt vs. generation tokens, and error metrics in Token Factory.
 3. **Local-to-Cloud Fallback Router**: An official lightweight client middleware to seamlessly fall back from local Ollama to Token Factory when compute is saturated.
+
+---
+
+## 4. Person 1 — Token Factory Setup Notes (2026-10-30)
+
+### What was easy
+- **Drop-in OpenAI SDK compatibility** worked on first try: `AsyncOpenAI(api_key=..., base_url="https://api.tokenfactory.nebius.com/v1")` — no monkey-patching or extra headers.
+- **Dynamic rate limits** are a genuine differentiator: no quota-increase requests needed, limits scale with usage automatically.
+- **Tool calling format** is identical to OpenAI's — the same Pydantic-to-JSON-schema conversion code worked without modification.
+
+### What was confusing
+- **Model ID uses underscore, not dot:** `nvidia/Nemotron-3_5-Lightning` (note `3_5`, not `3.5`). Not obvious from model name; a 404 error is the only signal.
+- **`nebius/` prefix ambiguity:** Router libraries (LiteLLM, Mastra) add a `nebius/` prefix, but direct Nebius API calls must NOT include it. This caused silent routing failures until discovered.
+- **No NVIDIA embedding model listed:** The documentation implies NVIDIA models are the primary offering, but embedding workloads must use BAAI models (`BAAI/bge-en-icl`). This was not prominently documented and required searching community sources to confirm.
+- **Rate-limit headers inconsistency:** `x-ratelimit-remaining-*` headers were absent on some responses during burst tests, making it hard to implement proactive backoff without hitting 429 first.

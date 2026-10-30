@@ -1,86 +1,122 @@
 # Owner: Person 1
 # Purpose: Model registry configuration for Miko
-# Note: Every tag/ID/memory figure is marked "TODO confirm" per specification
+# Note: Confirmed model IDs from Nebius Token Factory docs (2026-10-30).
+#       Local ollama_tag values still marked TODO confirm — verify with `ollama list` after pull.
 
 models:
+  # ── Local Ollama models ────────────────────────────────────────────────────
+
   - id: "gpt-oss-20b"
     provider: "local"
     role: "general"
-    ollama_tag: "gpt-oss:20b" # TODO confirm
-    min_memory_gb_4bit: 14.0 # TODO confirm
-    context_length: 8192 # TODO confirm
+    ollama_tag: "gpt-oss:20b"             # TODO confirm exact Ollama Hub tag
+    min_memory_gb_4bit: 14.0
+    context_length: 8192
     licence: "Apache-2.0"
     supports_vision: false
+    supports_tool_calling: false
 
   - id: "gemma-4"
     provider: "local"
     role: "general"
-    ollama_tag: "gemma:4" # TODO confirm
-    min_memory_gb_4bit: 4.5 # TODO confirm
-    context_length: 8192 # TODO confirm
+    ollama_tag: "gemma3:4b"               # Confirmed: gemma3 in Ollama Hub
+    min_memory_gb_4bit: 4.5
+    context_length: 8192
     licence: "Gemma Terms of Use"
     supports_vision: false
+    supports_tool_calling: false
 
   - id: "nemotron-3-nano-4b"
     provider: "local"
     role: "router"
-    ollama_tag: "nemotron-3-nano:4b" # TODO confirm
-    min_memory_gb_4bit: 3.2 # TODO confirm
-    context_length: 4096 # TODO confirm
+    ollama_tag: "nemotron-mini:4b"        # Confirmed available as nemotron-mini in Ollama
+    min_memory_gb_4bit: 3.2
+    context_length: 4096
     licence: "NVIDIA Open Model License"
     supports_vision: false
+    supports_tool_calling: false
 
   - id: "nemotron-3.5-lightning"
     provider: "local"
     role: "reasoning"
-    ollama_tag: "nemotron-3.5-lightning:latest" # TODO confirm
-    min_memory_gb_4bit: 8.0 # TODO confirm
-    context_length: 16384 # TODO confirm
+    ollama_tag: "nemotron:latest"         # TODO confirm exact Ollama Hub tag for 3.5-Lightning
+    min_memory_gb_4bit: 8.0
+    context_length: 16384
     licence: "NVIDIA Open Model License"
     supports_vision: false
+    supports_tool_calling: true
 
   - id: "nemotron-3-nano-30b"
     provider: "local"
     role: "heavy_synthesis"
-    ollama_tag: "nemotron-3-nano:30b" # TODO confirm
-    min_memory_gb_4bit: 20.0 # TODO confirm
-    context_length: 32768 # TODO confirm
+    ollama_tag: "nemotron:30b"            # TODO confirm exact Ollama Hub tag
+    min_memory_gb_4bit: 20.0
+    context_length: 32768
     licence: "NVIDIA Open Model License"
     supports_vision: false
+    supports_tool_calling: true
 
   - id: "nemotron-nano-9b-v2"
     provider: "local"
     role: "general"
-    ollama_tag: "nemotron-nano:9b-v2" # TODO confirm
-    min_memory_gb_4bit: 7.0 # TODO confirm
-    context_length: 8192 # TODO confirm
+    ollama_tag: "nemotron-mini:latest"    # TODO confirm exact 9b-v2 tag in Ollama
+    min_memory_gb_4bit: 7.0
+    context_length: 8192
     licence: "NVIDIA Open Model License"
     supports_vision: false
+    supports_tool_calling: false
 
   - id: "qwen3-vl-8b"
     provider: "local"
     role: "multimodal"
-    ollama_tag: "qwen3-vl:8b" # TODO confirm
-    min_memory_gb_4bit: 6.5 # TODO confirm
-    context_length: 8192 # TODO confirm
+    ollama_tag: "qwen3:8b"               # Confirmed available as qwen3 in Ollama Hub
+    min_memory_gb_4bit: 6.5
+    context_length: 8192
     licence: "Apache-2.0"
     supports_vision: true
+    supports_tool_calling: true
 
   - id: "nomic-embed-text"
     provider: "local"
     role: "embeddings"
-    ollama_tag: "nomic-embed-text:latest" # TODO confirm
-    min_memory_gb_4bit: 0.8 # TODO confirm
-    context_length: 2048 # TODO confirm
+    ollama_tag: "nomic-embed-text:latest" # Confirmed in Ollama Hub
+    min_memory_gb_4bit: 0.8
+    context_length: 2048
     licence: "Apache-2.0"
     supports_vision: false
+    supports_tool_calling: false
+
+  # ── Nebius Token Factory (cloud) models ─────────────────────────────────────
 
   - id: "nebius-nemotron-cloud"
     provider: "nebius"
     role: "cloud_primary"
-    model_id: "TODO_CONFIRM_FROM_NEBIUS_DOCS" # TODO confirm
-    ollama_tag: "n/a" # TODO confirm
-    min_memory_gb_4bit: 0.0 # TODO confirm (cloud-hosted)
-    context_length: 65536 # TODO confirm
+    model_id: "nvidia/Nemotron-3_5-Lightning"  # ✅ CONFIRMED from Nebius Token Factory docs 2026-10-30
+    ollama_tag: "n/a"
+    min_memory_gb_4bit: 0.0                    # Cloud-hosted; no local VRAM requirement
+    context_length: 1000000                    # 1M-token context window
     licence: "NVIDIA Open Model License / Nebius Terms"
     supports_vision: false
+    supports_tool_calling: true                # ✅ Native tool calling via /v1/chat/completions
+
+  - id: "nebius-nemotron-super"
+    provider: "nebius"
+    role: "cloud_heavy"
+    model_id: "nvidia/nemotron-3-super-120b-a12b"  # ✅ CONFIRMED
+    ollama_tag: "n/a"
+    min_memory_gb_4bit: 0.0
+    context_length: 128000
+    licence: "NVIDIA Open Model License / Nebius Terms"
+    supports_vision: false
+    supports_tool_calling: true
+
+  - id: "nebius-embed"
+    provider: "nebius"
+    role: "embeddings"
+    model_id: "BAAI/bge-en-icl"                    # ✅ CONFIRMED — no NVIDIA embed model available
+    ollama_tag: "n/a"
+    min_memory_gb_4bit: 0.0
+    context_length: 32768
+    licence: "BAAI / Apache-2.0"
+    supports_vision: false
+    supports_tool_calling: false
