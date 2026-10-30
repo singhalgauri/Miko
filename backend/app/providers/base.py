@@ -8,14 +8,32 @@ from typing import Any
 from pydantic import BaseModel, Field
 
 
+class ToolCall(BaseModel):
+    """A single tool/function call returned by the model."""
+
+    id: str = ""
+    name: str
+    args: dict[str, Any] = Field(default_factory=dict)
+
+
+class Usage(BaseModel):
+    """Token usage statistics returned by the provider."""
+
+    prompt_tokens: int = 0
+    completion_tokens: int = 0
+    total_tokens: int = 0
+
+
 class ChatResult(BaseModel):
     """Structured result returned by ModelProvider chat completions."""
 
     content: str = ""
-    tool_calls: list[dict[str, Any]] = Field(default_factory=list)
+    tool_calls: list[ToolCall] = Field(default_factory=list)
     model: str = "mock-model"
     finish_reason: str = "stop"
-    usage: dict[str, int] = Field(default_factory=dict)
+    usage: Usage = Field(default_factory=Usage)
+    latency_ms: float = 0.0
+    provider: str = ""
 
 
 class ModelProvider(ABC):

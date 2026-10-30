@@ -1,6 +1,6 @@
 # Owner: Person 1
-# Purpose: ModelProvider factory resolving provider from settings
-# TODO(person1): Add dynamic caching and reload on settings change
+# Purpose: ModelProvider factory resolving provider from settings/env
+
 
 from backend.app.core.config import settings
 from backend.app.core.logging import logger
@@ -9,18 +9,37 @@ from backend.app.providers.mock_provider import MockProvider
 from backend.app.providers.nebius_provider import NebiusProvider
 from backend.app.providers.ollama_provider import OllamaProvider
 
+# Cache: one instance per provider name within a process lifetime
+_provider_cache: dict[str, ModelProvider] = {}
+
 
 def get_provider(provider_name: str | None = None) -> ModelProvider:
-    """Returns the configured ModelProvider instance according to application settings."""
-    chosen = (provider_name or settings.provider).lower()
+    """Returns the configured ModelProvider instance.
+
+    Reads PROVIDER env/setting (local | nebius | mock). Caches per name.
+    Falls back to MockProvider for unknown values so main never breaks.
+    """
+    chosen = (provider_name or settings.provider).lower().strip()
+
+    if chosen in _provider_cache:
+        return _provider_cache[chosen]
+
     logger.info("Resolving ModelProvider for '%s'", chosen)
 
     if chosen == "local":
-        return OllamaProvider()
+        provider: ModelProvider = OllamaProvider()
     elif chosen == "nebius":
-        return NebiusProvider()
+        provider = NebiusProvider()
     elif chosen == "mock":
-        return MockProvider()
+        provider = MockProvider()
     else:
         logger.warning("Unknown provider '%s', defaulting to MockProvider", chosen)
-        return MockProvider()
+        provider = MockProvider()
+
+    _provider_cache[chosen] = provider
+    return provider
+
+
+def clear_provider_cache() -> None:
+    """Clears the provider cache — useful in tests to get a fresh instance."""
+    _provider_cache.clear()
